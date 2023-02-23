@@ -1,0 +1,43 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 320px;
+}
+
+.form__input {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 0;
+  background-color: inherit;
+  color: #666;
+  border: none;
+
+  &:focus {
+    border: none;
+    outline: 1px dashed #666;
+  }
+}
+
+.form__btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 18px;
+
+  &:hover,
+  &:focus {
+    animation-duration: 0.3s;
+    animation-name: rotateBtnAnimation;
+  }
+}
+
+@keyframes rotateBtnAnimation {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
+}

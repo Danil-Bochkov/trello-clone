@@ -1,0 +1,11 @@
+.Textarea {
+  font: inherit;
+  border: 1px dashed #ccc;
+  padding: 5px 10px;
+  overflow: hidden;
+  resize: none;
+
+  &:focus {
+    outline: none;
+  }
+}
