@@ -1,16 +1,16 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { deleteCard } from "../../redux/board/cards/operations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
   faClock,
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
-import { deleteCard } from "../../redux/board/cards/operations";
 
 import styles from "./CategoryItem.module.scss";
 import handleTimeAgo from "../../utils/handleTimeAgo";
 import EditCategoryItem from "../EditCategoryItem/EditCategoryItem";
-import { useState } from "react";
 
 export const CategoryItem = ({ card }) => {
   const dispatch = useDispatch();

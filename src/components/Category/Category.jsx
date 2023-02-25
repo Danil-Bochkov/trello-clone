@@ -1,14 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLists } from "../../redux/board/lists/operations";
-import { selectLists } from "../../redux/board/lists/selectors";
+import {
+  selectLists,
+  selectListsError,
+  selectListsIsLoading,
+} from "../../redux/board/lists/selectors";
 import AddCategoryList from "../AddCategoryList/AddCategoryList";
 import { CategoryList } from "../CategoryList/CategoryList";
+import Loader from "../Loader/Loader";
 import styles from "./Category.module.scss";
 
 export const Category = () => {
   const dispatch = useDispatch();
   const lists = useSelector(selectLists);
+  const error = useSelector(selectListsError);
+  const isLoading = useSelector(selectListsIsLoading);
 
   const [title, setTitle] = useState("Change title to your");
   const [editableTitle, setEditableTitle] = useState(title);
@@ -53,6 +60,7 @@ export const Category = () => {
         ))}
         <AddCategoryList />
       </div>
+      {isLoading && !error && <Loader />}
     </div>
   );
 };
