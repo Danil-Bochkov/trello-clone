@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { updateCardInfo } from "../../redux/board/cards/operations";
 import TextArea from "../Textarea/Textarea";
 import styles from "../AddCategoryItem/AddCategoryItem.module.scss";
+import { toast } from "react-toastify";
 
 const EditCategoryItem = ({ cardId, title, description, handleClick }) => {
   const [idOfCard, setIdOfCard] = useState(cardId);
@@ -19,16 +20,26 @@ const EditCategoryItem = ({ cardId, title, description, handleClick }) => {
   };
 
   const handleUpdateInfoCard = () => {
-    dispatch(
-      updateCardInfo({
-        cardId: idOfCard,
-        title: titleToEdit,
-        description: descriptionToEdit,
-      })
-    );
-    setTitle("");
-    setDescription("");
-    handleClick();
+    if (!titleToEdit || !descriptionToEdit) {
+      return toast.error("Fields can`t be empty");
+    } else if (titleToEdit.length <= 3) {
+      return toast.info("The title of the card must be at least 4 characters");
+    } else if (descriptionToEdit.length <= 7) {
+      return toast.info(
+        "The description of the card must be at least 8 characters"
+      );
+    } else {
+      dispatch(
+        updateCardInfo({
+          cardId: idOfCard,
+          title: titleToEdit,
+          description: descriptionToEdit,
+        })
+      );
+      setTitle("");
+      setDescription("");
+      handleClick();
+    }
   };
 
   return (
