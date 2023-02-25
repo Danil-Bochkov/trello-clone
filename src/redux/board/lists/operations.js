@@ -28,9 +28,9 @@ export const addList = createAsyncThunk(
 
 export const updateList = createAsyncThunk(
     'lists/updateList',
-    async (_id, thunkAPI) => { 
-    try {
-            const response = await axiosInstance.put(`/lists/${_id}`);
+    async ({listId, title}, thunkAPI) => { 
+      try {
+            const response = await axiosInstance.patch(`/lists/${listId}`, title);
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);

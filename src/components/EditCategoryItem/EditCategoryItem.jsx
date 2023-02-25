@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { addCard } from "../../redux/board/cards/operations";
+import { updateCardInfo } from "../../redux/board/cards/operations";
 import TextArea from "../Textarea/Textarea";
-import styles from "./AddCategoryItem.module.scss";
+import styles from "../AddCategoryItem/AddCategoryItem.module.scss";
 
-const AddCategoryItem = ({ handleClick, listId }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+const EditCategoryItem = ({ cardId, title, description, handleClick }) => {
+  const [idOfCard, setIdOfCard] = useState(cardId);
+  const [titleToEdit, setTitle] = useState(title);
+  const [descriptionToEdit, setDescription] = useState(description);
   const dispatch = useDispatch();
 
   const handleTitleChange = (event) => {
@@ -18,14 +18,14 @@ const AddCategoryItem = ({ handleClick, listId }) => {
     setDescription(event.target.value);
   };
 
-  const handleAddCard = () => {
-    const cardData = { title: title.trim(), description: description.trim() };
-    if (!title || !description) {
-      toast.info("You must provide a title and description");
-      return;
-    }
-
-    dispatch(addCard({ listId, ...cardData }));
+  const handleUpdateInfoCard = () => {
+    dispatch(
+      updateCardInfo({
+        cardId: idOfCard,
+        title: titleToEdit,
+        description: descriptionToEdit,
+      })
+    );
     setTitle("");
     setDescription("");
     handleClick();
@@ -36,20 +36,20 @@ const AddCategoryItem = ({ handleClick, listId }) => {
       <input
         type="text"
         maxLength={20}
-        value={title}
+        value={titleToEdit}
         onChange={handleTitleChange}
         placeholder="Title"
       />
       <TextArea
         placeholder="Enter description here"
         handleChange={handleDescriptionChange}
-        value={description}
+        value={descriptionToEdit}
       />
       <div className={styles.btnWrapper}>
         <button type="button" onClick={handleClick}>
           Cancel
         </button>
-        <button type="button" onClick={handleAddCard}>
+        <button type="button" onClick={handleUpdateInfoCard}>
           Add Card
         </button>
       </div>
@@ -57,4 +57,4 @@ const AddCategoryItem = ({ handleClick, listId }) => {
   );
 };
 
-export default AddCategoryItem;
+export default EditCategoryItem;

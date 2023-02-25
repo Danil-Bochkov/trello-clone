@@ -27,10 +27,6 @@ export const Category = () => {
     }
   }, [isEditingTitle, editableTitle]);
 
-  function handleTitleClick() {
-    setIsEditingTitle(true);
-  }
-
   function handleTitleChange(event) {
     setEditableTitle(event.target.value);
   }
@@ -42,25 +38,14 @@ export const Category = () => {
   return (
     <div className={styles.category}>
       <div className={styles.category__header}>
-        {isEditingTitle ? (
-          <input
-            type="text"
-            value={editableTitle}
-            onChange={handleTitleChange}
-            onBlur={handleTitleBlur}
-            ref={titleInputRef}
-            maxLength={40}
-          />
-        ) : title === "" ? (
-          <h2
-            className={styles.category__header_placeholder}
-            onClick={handleTitleClick}
-          >
-            Fill this input
-          </h2>
-        ) : (
-          <h2 onClick={handleTitleClick}>{title}</h2>
-        )}
+        <input
+          type="text"
+          value={editableTitle}
+          onChange={handleTitleChange}
+          onBlur={handleTitleBlur}
+          ref={titleInputRef}
+          maxLength={40}
+        />
       </div>
       <div className={styles.contentWrapper}>
         {lists.map((item, i) => (

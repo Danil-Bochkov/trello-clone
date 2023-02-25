@@ -1,0 +1,14 @@
+.logoWrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  & span {
+    font-size: 25px;
+    font-weight: 500;
+  }
+}

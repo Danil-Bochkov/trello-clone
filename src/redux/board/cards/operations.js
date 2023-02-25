@@ -1,8 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosInstance } from '../../../utils/axios.config'
 import { toast } from "react-toastify";
-import { selectListId } from '../lists/selectors';
-import { useSelector } from 'react-redux';
 
 export const fetchCards = createAsyncThunk(
   "cards/fetchCards",
@@ -30,10 +28,21 @@ export const addCard = createAsyncThunk(
 
 export const updateCard = createAsyncThunk(
     'cards/updateCard',
-    async (cardId, thunkAPI) => { 
+    async ({cardId, body}, thunkAPI) => { 
       try {
-            const listId = useSelector(selectListId);
-            const response = await axiosInstance.put(`/lists/cards/${listId}/${cardId}`);
+            const response = await axiosInstance.patch(`/lists/cards/${body.listId}/${cardId}`, body);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+export const updateCardInfo = createAsyncThunk(
+    'cards/updateCardInfo',
+    async (body, thunkAPI) => { 
+      try {
+            const response = await axiosInstance.put(`/lists/cards/${body.cardId}`, body);
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);

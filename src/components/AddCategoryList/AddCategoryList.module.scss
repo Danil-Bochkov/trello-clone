@@ -7,6 +7,7 @@
 
 .form__input {
   font-size: 18px;
+  padding: 2px 10px;
   font-weight: bold;
   margin-bottom: 0;
   background-color: inherit;
@@ -21,23 +22,16 @@
 
 .form__btn {
   position: absolute;
-  top: 0;
+  top: 2px;
   right: 0;
   font-size: 18px;
-
+  width: fit-content;
+  height: 18px;
+  padding: 0;
+  transition: 0.3s ease-in-out;
   &:hover,
   &:focus {
-    animation-duration: 0.3s;
-    animation-name: rotateBtnAnimation;
-  }
-}
-
-@keyframes rotateBtnAnimation {
-  from {
-    transform: rotate(0);
-  }
-
-  to {
+    transform-origin: center;
     transform: rotate(180deg);
   }
 }

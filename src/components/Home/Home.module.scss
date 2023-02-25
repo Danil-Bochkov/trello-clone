@@ -1,0 +1,23 @@
+.wrapper {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.listInfo {
+  margin-top: 20px;
+  list-style: disc;
+
+  padding-left: 40px;
+  padding-right: 40px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
