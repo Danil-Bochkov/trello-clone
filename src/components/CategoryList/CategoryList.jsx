@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteList, updateList } from "../../redux/board/lists/operations";
+import { deleteList } from "../../redux/board/lists/operations";
 import { CategoryItem } from "../CategoryItem/CategoryItem";
 import AddCategoryItem from "../AddCategoryItem/AddCategoryItem";
 
@@ -20,11 +20,8 @@ export const CategoryList = ({ list }) => {
   const [sortDirection, setSortDirection] = useState("desc"); // or 'asc'
   const [sortedCards, setSortedCards] = useState([]);
 
-  const handleOpenClick = () => {
-    setShowAddCard(true);
-  };
-  const handleCloseClick = () => {
-    setShowAddCard(false);
+  const toggleAppCard = () => {
+    setShowAddCard(!showAddCard);
   };
 
   const sortCards = (direction) => {
@@ -107,12 +104,12 @@ export const CategoryList = ({ list }) => {
             </div>
           ))}
       {showAddCard ? (
-        <AddCategoryItem handleClick={handleCloseClick} listId={list._id} />
+        <AddCategoryItem handleClick={toggleAppCard} listId={list._id} />
       ) : (
         <button
           type="button"
           className={styles.categoryList__btn}
-          onClick={handleOpenClick}
+          onClick={toggleAppCard}
         >
           <FontAwesomeIcon icon={faPlus} />
           Add card

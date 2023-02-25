@@ -2,6 +2,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { addList } from "../../redux/board/lists/operations";
 import styles from "./AddCategoryList.module.scss";
 
@@ -11,6 +12,13 @@ const AddCategoryList = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (title === "") {
+      return toast.info("Please fill in the title of the category");
+    } else if (title.length <= 1) {
+      return toast.error(
+        "The title of the category must be at least 2 characters"
+      );
+    }
     dispatch(addList({ title }));
     setTitle("");
   };

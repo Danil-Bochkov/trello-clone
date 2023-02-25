@@ -44,7 +44,8 @@ export const updateCardInfo = createAsyncThunk(
       try {
             const response = await axiosInstance.put(`/lists/cards/${body.cardId}`, body);
             return response.data;
-        } catch (e) {
+      } catch (e) {
+        toast.error('Fields can`t be empty');
             return thunkAPI.rejectWithValue(e.message);
         }
     }
